@@ -7,12 +7,10 @@ on:
     branches:
       - main
 
-concurrency:
-  group: pr-main-${{ github.head_ref }}
-  cancel-in-progress: true
-
 jobs:
-  screenshot-tests:
+  test:
+    if: github.event_name == 'pull_request'
+    name: Test against snapshots
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
